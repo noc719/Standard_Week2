@@ -9,6 +9,7 @@ public class ObjectPool : MonoBehaviour
     public GameObject prefab;
     private List<GameObject> pool = new List<GameObject>();
     private int poolSize = 300; // 최소 300의 반복의 조건을 받음
+    private Dictionary<string, List<GameObject>> poolDict;
     public int PoolSize 
     {
         get { return poolSize; }
@@ -20,6 +21,11 @@ public class ObjectPool : MonoBehaviour
         }
     }
 
+    private void Awake()
+    {
+        poolDict = new Dictionary<string, List<GameObject>>();
+    }
+
     void Start()
     {
         for (int i = 0; i < poolSize; i++) //시작할 때 poolSize 만큼 prefab을 만들어 놓기위해 반복문
@@ -28,21 +34,27 @@ public class ObjectPool : MonoBehaviour
             Release(obj); //비활성화하는 메서드
             pool.Add(obj); //리스트 pool에 Add로 저장 
         }
+        poolDict.Add(prefab.name, pool);
     }
     
-    public GameObject Get()
+    public GameObject Get(string key)
     {
-        for (int i =0; i < pool.Count; i++) //비활성화 된 것을 찾아 쓰기위해 조건문
+        if (!poolDict.ContainsKey(key))
+            return null;
+        foreach (var dirctionary in poolDict)
         {
-            if (!pool[i].activeInHierarchy) //만약 pool의 i번째가 비활성화라면(activeInHierarchy는 유니티 에디터 Hierarchy 창 상에서 활성화여부를 나타냄)
+            for (int i = 0; poolDict[key].Count > i; i++)
             {
-                pool[i].SetActive(true); //비활성화된 개체를 활성화
-                return pool[i]; //활성화하고나서 반환 (메서드 종료)
-            }   
+                if (!poolDict[key][i].activeInHierarchy)
+                {
+                    poolDict[key][i].SetActive(true);
+                    return poolDict[key][i];
+                }
+            }
         }
-        GameObject obj = Instantiate(prefab); // 조건 ,  비활성화 된 것이 없다면 새로 프리팹을 만들고 obj에 할당
-        pool.Add(obj); //pool 리스트에 추가하고
-        return obj; //그것을 반환 (메서드 종료)
+        GameObject obj = Instantiate(prefab);
+        poolDict[key].Add(obj);
+        return obj;
     }
 
     public void Release(GameObject obj)
