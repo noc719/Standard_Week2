@@ -25,6 +25,9 @@ public class QuestManager : MonoBehaviour
             return instance; // 외부로 반환시킴
         }
     }
+
+    public List<QuestDataSO> list;
+
     private void Awake()  //Awake가 실행되는 시점은 이것이 신이 변경되거나 처음 이것이 불러와질 때
     {
         if (instance == null) // 인스턴스가 null 값이라면 
@@ -35,5 +38,18 @@ public class QuestManager : MonoBehaviour
         {
             Destroy(gameObject); //이미 값이 있다면 파괴된다. Awake가 실행되는 시점을 이유로 이것은 씬이 변경될 때 파괴될 것이다.
         }  //일단 인스턴스를 하나만 두는 로직을 만들기로 하였으니 맞는 것같다..
+    }
+
+    private void Start()
+    {
+        PrintQuest();
+    }
+
+    private void PrintQuest()
+    {
+        for (int i = 0; i<list.Count;  i++)
+        {
+            Debug.Log($"Quest{i}-{list[i].QuestName}(최소 레벨{list[i].QuestRequiredLevel})");
+        }
     }
 }
