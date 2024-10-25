@@ -26,7 +26,7 @@ public class QuestManager : MonoBehaviour
         }
     }
 
-    public List<QuestDataSO> list;
+    public List<QuestDataSO> Quests;
 
     private void Awake()  //Awake가 실행되는 시점은 이것이 신이 변경되거나 처음 이것이 불러와질 때
     {
@@ -47,9 +47,9 @@ public class QuestManager : MonoBehaviour
 
     private void PrintQuest()
     {
-        for (int i = 0; i<list.Count;  i++)
+        for (int i = 0; i<Quests.Count;  i++)
         {
-            Debug.Log($"Quest{i}-{list[i].QuestName}(최소 레벨{list[i].QuestRequiredLevel})");
+            Debug.Log($"Quest{i+1}-{Quests[i].QuestName}(최소 레벨{Quests[i].QuestRequiredLevel})");
         }
     }
 }

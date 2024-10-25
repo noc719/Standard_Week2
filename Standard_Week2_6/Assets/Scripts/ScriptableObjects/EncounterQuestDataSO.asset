@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5c679b73f8770b44b331b4d322a9ced, type: 3}
   m_Name: EncounterQuestDataSO
   m_EditorClassIdentifier: 
-  QuestName: EncounterEvent
-  QuestRequiredLevel: 10
-  QuestNPC: 1112
+  QuestName: "\uC720\uB2C8\uD2F0 \uB9C8\uC2A4\uD130\uAC00 \uB418\uB294 \uAE38"
+  QuestRequiredLevel: 70
+  QuestNPC: 11
   encounterId: 34

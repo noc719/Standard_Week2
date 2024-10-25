@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9532b2c5a9f8b794d8da695d54057a33, type: 3}
   m_Name: MonsterQuestDataSO
   m_EditorClassIdentifier: 
-  QuestName: KillGoblin
-  QuestRequiredLevel: 1
+  QuestName: "\uC2A4\uD30C\uB974\uD0C0\uC5D0 \uC785\uC131\uD588\uB2E4"
+  QuestRequiredLevel: 10
   QuestNPC: 4
   monsterName: Goblin
